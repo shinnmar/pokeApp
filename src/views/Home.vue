@@ -4,28 +4,46 @@
     <div v-if="loading">Loading...</div>
     <div v-if="error">{{ error }}</div>
     <div v-else>
-      <div v-for="pokemon in pokemonList" :key="pokemon.name" class="pokemon">
+      <div
+        v-for="pokemon in paginatedPokemonList"
+        :key="pokemon.name"
+        class="pokemon"
+      >
         <p>{{ pokemon.name }}</p>
-        <img :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${getPokemonId(pokemon.url)}.png`" alt="pokemon.name" />
-        <button 
+        <img
+          :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${getPokemonId(
+            pokemon.url
+          )}.png`"
+          alt="pokemon.name"
+        />
+
+        <button
           @click="addPokemon(pokemon)"
-          :disabled="isPokemonSelected(pokemon) || selectionCount >= maxSelection">
+          :disabled="
+            isPokemonSelected(pokemon) || selectionCount >= maxSelection
+          "
+        >
           Add
         </button>
-        <button 
+        <button
           @click="removePokemon(pokemon)"
-          :disabled="!isPokemonSelected(pokemon)">
+          :disabled="!isPokemonSelected(pokemon)"
+        >
           Remove
         </button>
       </div>
-      <div class="counter">
-        Pokémon Added: {{ selectionCount }}
-      </div>
+      <div class="counter">Pokémon Added: {{ selectionCount }}</div>
+
       <div class="pagination">
-        <button @click="previousPage" :disabled="currentPage === 1">Previous</button>
-        <span>Page {{ currentPage }}</span>
-        <button @click="nextPage">Next</button>
+        <button @click="previousPage" :disabled="currentPage === 1">
+          Previous
+        </button>
+        <span>Page {{ currentPage }} of {{ totalPages }}</span>
+        <button @click="nextPage" :disabled="currentPage >= totalPages">
+          Next
+        </button>
       </div>
+
       <router-link to="/team">
         <button>Go to Team</button>
       </router-link>
@@ -33,26 +51,61 @@
   </div>
 </template>
 
-
 <script lang="ts">
-import { onMounted, computed } from 'vue';
-import { usePokemon } from '../composables/usePokemon';
-import { useTeam } from '../composables/useTeam'; 
+import { ref, computed, onMounted } from "vue";
+import { fetchFirst151Pokemon } from "../services/api";
+import { useTeam } from "../composables/useTeam";
 
 export default {
   setup() {
-    const { pokemonList, loading, error, fetchPokemonList, nextPage, previousPage, currentPage } = usePokemon();
-    const { addPokemon, removePokemon, isPokemonSelected, getSelectionCount } = useTeam();
-
+    // Initialize Pokemonlist as an empty array
+    const pokemonList = ref<any[]>([]);
+    const loading = ref(true);
+    const error = ref<string | null>(null);
+    const currentPage = ref(1);
+    const pokemonPerPage = 25;
+    const totalPages = computed(() => Math.ceil(151 / pokemonPerPage));
     const maxSelection = 6;
+    const { addPokemon, removePokemon, isPokemonSelected, getSelectionCount } =
+      useTeam();
     const selectionCount = computed(() => getSelectionCount());
 
+    // Computed property to create pagination
+    const paginatedPokemonList = computed(() => {
+      const start = (currentPage.value - 1) * pokemonPerPage;
+      const end = start + pokemonPerPage;
+      return pokemonList.value.slice(start, end);
+    });
+
+    //this shows only the first 151 Pokémon
+    const fetchPokemons = async () => {
+      try {
+        pokemonList.value = await fetchFirst151Pokemon();
+      } catch (e) {
+        error.value = "Failed to load Pokémon.";
+      } finally {
+        loading.value = false;
+      }
+    };
+
+    const nextPage = () => {
+      if (currentPage.value < totalPages.value) {
+        currentPage.value += 1;
+      }
+    };
+
+    const previousPage = () => {
+      if (currentPage.value > 1) {
+        currentPage.value -= 1;
+      }
+    };
+
     onMounted(() => {
-      fetchPokemonList();
+      fetchPokemons();
     });
 
     const getPokemonId = (url: string) => {
-      const parts = url.split('/');
+      const parts = url.split("/");
       return parts[parts.length - 2];
     };
 
@@ -60,7 +113,6 @@ export default {
       pokemonList,
       loading,
       error,
-      fetchPokemonList,
       nextPage,
       previousPage,
       currentPage,
@@ -69,13 +121,19 @@ export default {
       removePokemon,
       isPokemonSelected,
       selectionCount,
-      maxSelection
+      maxSelection,
+      totalPages,
+      paginatedPokemonList,
     };
   },
 };
 </script>
 
 <style scoped>
+img {
+  width: 8%;
+}
+
 .pokemon {
   display: flex;
   flex-direction: column;

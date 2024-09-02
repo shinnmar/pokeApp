@@ -1,7 +1,7 @@
 <template>
   <div @click="selectPokemon">
-    <img :src="pokemon.image" alt="Pokemon Image" />
-    <p>{{ pokemon.name }}</p>
+    <img :src="pokemon?.image" alt="Pokemon Image" />
+    <p>{{ pokemon?.name }}</p>
   </div>
 </template>
 

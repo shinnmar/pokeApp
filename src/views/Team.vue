@@ -5,9 +5,15 @@
       You've not selected a Pokémon.
     </div>
     <div v-else>
-      <div v-for="pokemon in selectedPokemons" :key="pokemon.name" class="pokemon">
-        <p>{{ pokemon.name }}</p>
-        <img :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${getPokemonId(pokemon.url)}.png`" alt="pokemon.name" />
+      <div
+        v-for="pokemon in selectedPokemons"
+        :key="pokemon.name"
+        class="pokemon"
+      >
+        <router-link :to="`/team/${getPokemonId(pokemon.url)}`">
+          <p>{{ pokemon.name }}</p>
+          <img :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${getPokemonId(pokemon.url)}.png`" alt="pokemon.name" />
+        </router-link>
         <button @click="removePokemon(pokemon)">Quitar</button>
       </div>
       <div class="counter">
@@ -21,8 +27,8 @@
 </template>
 
 <script lang="ts">
-import { computed } from 'vue';
-import { useTeam } from '../composables/useTeam';
+import { computed } from "vue";
+import { useTeam } from "../composables/useTeam";
 
 export default {
   setup() {
@@ -31,7 +37,7 @@ export default {
     const selectedPokemons = computed(() => getSelectedPokemons());
 
     const getPokemonId = (url: string) => {
-      const parts = url.split('/');
+      const parts = url.split("/");
       return parts[parts.length - 2];
     };
 
@@ -44,16 +50,8 @@ export default {
 };
 </script>
 
-<style scoped>
-.pokemon {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.counter {
-  margin-top: 20px;
-  font-weight: bold;
+<style>
+img {
+  width: 30%;
 }
 </style>
