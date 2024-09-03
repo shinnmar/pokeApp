@@ -40,7 +40,7 @@ export async function fetchPokemonSpecies(id: number) {
   }
 }
 
-// add the evolutionChain for Team and Team:id pages
+// add the evolutionChain for Team and Team:id
 export async function fetchPokemonEvolutionChain(id: number) {
   try {
     const speciesResponse = await fetchPokemonSpecies(id);

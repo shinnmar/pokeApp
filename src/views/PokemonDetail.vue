@@ -9,9 +9,12 @@
 
     <p>
       Type:
-      <span v-for="type in pokemon.types" :key="type.type.name">{{
-        type.type.name
-      }}</span>
+      <span
+        v-for="type in pokemon.types"
+        :key="type.type.name"
+        :class="getTypeClass(type.type.name)"
+        >{{ type.type.name }}</span
+      >
     </p>
     <p>Height: {{ pokemon.height / 10 }} m</p>
     <p>Weight: {{ pokemon.weight / 10 }} kg</p>
@@ -50,6 +53,7 @@ import {
   fetchPokemonSpecies,
   fetchPokemonEvolutionChain,
 } from "../services/api";
+import { pokemonTypeClasses, PokemonType } from "../styles/pokemonTypes";
 
 export default defineComponent({
   setup() {
@@ -61,6 +65,10 @@ export default defineComponent({
 
     const cleanDescription = (description: string): string => {
       return description.replace(/\n|\f/g, " ").trim();
+    };
+
+    const getTypeClass = (typeName: string) => {
+      return pokemonTypeClasses[typeName as PokemonType] || "";
     };
 
     onMounted(async () => {
@@ -122,17 +130,18 @@ export default defineComponent({
 
     return {
       pokemon,
+      pokemonTypeClasses,
       description,
       evolutionChain,
       playCry,
       getSpriteUrl,
+      getTypeClass,
     };
   },
 });
 </script>
 
 <style scoped>
-
 .pokemon-detail {
   text-transform: capitalize;
 }
@@ -149,5 +158,4 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
 }
-
 </style>
