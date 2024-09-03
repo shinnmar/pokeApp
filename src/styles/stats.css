@@ -1,0 +1,73 @@
+.hp {
+  color: #ff5959;
+}
+
+.attack {
+  color: #f5ac78;
+}
+
+.defense {
+  color: #fae078;
+}
+
+.special-attack {
+  color: #9db7f5;
+}
+
+.special-defense {
+  color: #a7db8d;
+}
+
+.speed {
+  color: #fa92b2;
+}
+
+.hp,
+.attack,
+.defense,
+.special-attack,
+.special-defense,
+.speed {
+  margin: 1rem 0;
+}
+
+/* Progress bar */
+progress {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  appearance: none;
+}
+
+progress::-webkit-progress-bar {
+  background-color: #e0e0e0;
+}
+
+progress::-webkit-progress-value {
+  border-radius: 10px;
+}
+
+/* Color for each Stat */
+.hp progress::-webkit-progress-value {
+  background-color: #ff5959;
+}
+
+.attack progress::-webkit-progress-value {
+  background-color: #f5ac78;
+}
+
+.defense progress::-webkit-progress-value {
+  background-color: #fae078;
+}
+
+.special-attack progress::-webkit-progress-value {
+  background-color: #9db7f5;
+}
+
+.special-defense progress::-webkit-progress-value {
+  background-color: #a7db8d;
+}
+
+.speed progress::-webkit-progress-value {
+  background-color: #fa92b2;
+}

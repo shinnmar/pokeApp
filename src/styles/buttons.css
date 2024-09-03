@@ -4,13 +4,14 @@ button {
   border-radius: 50%;
   font-size: 3rem;
   cursor: pointer;
+  font-family: "Ubuntu", sans-serif;
 }
 
 .add {
   background: url(src/assets/images/icon_plus.png) no-repeat;
   background-size: cover;
-  width: 25px;
-  height: 25px;
+  width: 3rem;
+  height: 3rem;
   background-color: #8e9429;
   filter: invert(1);
 }
@@ -18,8 +19,8 @@ button {
 .remove {
   background: url(src/assets/images/icon_minus.svg) no-repeat;
   background-size: contain;
-  width: 25px;
-  height: 25px;
+  width: 3rem;
+  height: 3rem;
   background-color: #8e9429;
   filter: invert(1);
 }
@@ -29,4 +30,28 @@ button {
   text-decoration: underline;
   font-weight: 700;
   color: var(--white);
+}
+
+.play-cry {
+  padding: 0.7rem 3rem;
+  margin: 0 0 2rem;
+  font-size: 1.6rem;
+  border-radius: 5px;
+  background-color: var(--black);
+  color: var(--white);
+}
+
+.remove-selected {
+  padding: 0;
+  background-color: transparent;
+}
+
+.remove-selected:after {
+  content: "";
+  background: url(src/assets/images/icon_remove.png) no-repeat;
+  width: 3rem;
+  height: 3rem;
+  background-position: center;
+  display: inline-block;
+  background-size: cover;
 }

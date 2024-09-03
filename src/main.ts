@@ -9,6 +9,7 @@ import "./styles/pokemonTypes.css";
 import "./styles/buttons.css";
 import "./styles/pokemonStyles.css";
 import "./styles/typography.css";
+import "./styles/stats.css";
 
 const app = createApp(App);
 

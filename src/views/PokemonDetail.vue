@@ -1,35 +1,47 @@
 <template>
   <div class="container">
     <div class="pokemon-detail column" v-if="pokemon.name">
-      <div class="pokemon">
-        <h1>{{ pokemon.name }}</h1>
-        <img
-          :src="pokemon.sprites.other['official-artwork'].front_default"
-          alt="pokemon.name"
-        />
+      <div class="content row">
+        <div class="pokemon">
+          <h1>{{ pokemon.name }}</h1>
+          <img
+            :src="pokemon.sprites.other['official-artwork'].front_default"
+            alt="pokemon.name"
+          />
 
-        <p>Type:</p>
-        <div class="pokemon-type">
-          <span
-            v-for="type in pokemon.types"
-            :key="type.type.name"
-            :class="getTypeClass(type.type.name)"
-            >{{ type.type.name }}</span
-          >
+          <div class="pokemon-card">
+            <span class="subtitle">Type</span>
+            <div class="pokemon-type">
+              <span
+                v-for="type in pokemon.types"
+                :key="type.type.name"
+                :class="getTypeClass(type.type.name)"
+                >{{ type.type.name }}</span
+              >
+            </div>
+
+            <div class="info">
+              <p>
+                <span class="subtitle">Height:</span> {{ pokemon.height / 10 }} m
+              </p>
+              <p><span class="subtitle">Weight:</span> {{ pokemon.weight / 10 }} kg</p>
+            </div>
+
+            <p class="subtitle">Description:</p>
+            <p class="description">{{ description }}</p>
+          </div>
         </div>
 
-        <p>Height: {{ pokemon.height / 10 }} m</p>
-        <p>Weight: {{ pokemon.weight / 10 }} kg</p>
-
-        <p>Description:</p>
-        <p class="description">{{ description }}</p>
-      </div>
-
-      <div class="stats">
-        <h3>Stats</h3>
-        <div v-for="stat in pokemon.stats" :key="stat.stat.name">
-          <span>{{ stat.stat.name }}: {{ stat.base_stat }}</span>
-          <progress :value="stat.base_stat" max="160"></progress>
+        <div class="stats">
+          <h3>Stats</h3>
+          <div
+            v-for="stat in pokemon.stats"
+            :key="stat.stat.name"
+            :class="getStatClass(stat.stat.name)"
+          >
+            <span>{{ stat.stat.name }}: {{ stat.base_stat }}</span>
+            <progress :value="stat.base_stat" max="160"></progress>
+          </div>
         </div>
       </div>
 
@@ -76,6 +88,25 @@ export default defineComponent({
     const description = ref<string>("");
     const evolutionChain = ref<any[]>([]);
     const cry = ref<HTMLAudioElement | null>(null);
+
+    const getStatClass = (statName: string) => {
+      switch (statName) {
+        case "hp":
+          return "hp";
+        case "attack":
+          return "attack";
+        case "defense":
+          return "defense";
+        case "special-attack":
+          return "special-attack";
+        case "special-defense":
+          return "special-defense";
+        case "speed":
+          return "speed";
+        default:
+          return "";
+      }
+    };
 
     const cleanDescription = (description: string): string => {
       return description.replace(/\n|\f/g, " ").trim();
@@ -144,6 +175,7 @@ export default defineComponent({
 
     return {
       pokemon,
+      getStatClass,
       pokemonTypeClasses,
       description,
       evolutionChain,
@@ -157,11 +189,17 @@ export default defineComponent({
 
 <style scoped>
 .description {
-  text-transform: lowercase;
+  margin: 1rem 0;
+}
+
+.subtitle {
+  color: #a2d2eb;
 }
 
 .pokemon {
-  width: 50%;
+  width: 40%;
+  padding: 1rem;
+  border-radius: 0.8rem;
 }
 
 .pokemon-type {
@@ -169,14 +207,24 @@ export default defineComponent({
   flex-direction: row;
 }
 
-.pokemon-detail {
+.pokemon-detail,
+.description {
   text-transform: capitalize;
+}
+
+.info {
+  margin: 2rem 0;
+}
+
+.content {
+  width: 100%;
 }
 
 .stats {
   display: flex;
   flex-direction: column;
   text-align: left;
+  width: 30%;
 }
 
 .evolution-pokemon {

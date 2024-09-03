@@ -7,8 +7,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import BaseLayout from '../../pokeapp/src/components/layout/BaseLayout.vue';
-import Header from '../../pokeapp/src/components/header/Header.vue';
+import BaseLayout from '../src/components/Layout/BaseLayout.vue';
+import Header from "@/components/Header/Header.vue";
 
 export default defineComponent({
   components: {

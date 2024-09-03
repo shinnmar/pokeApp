@@ -10,7 +10,10 @@
         :key="pokemon.name"
         class="pokemon"
       >
-        <router-link :to="`/team/${getPokemonId(pokemon.url)}`">
+        <router-link
+          class="pokemon-link column"
+          :to="`/team/${getPokemonId(pokemon.url)}`"
+        >
           <h3 class="pokemon-name">{{ pokemon.name }}</h3>
           <img
             :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${getPokemonId(
@@ -19,12 +22,13 @@
             alt="pokemon.name"
           />
         </router-link>
-        <button @click="removePokemon(pokemon)" class="remove-selected">
-          Remove Pokémon
-        </button>
-        <div v-if="pokemonDetails[getPokemonId(pokemon.url)]">
-          <p>
-            Type:
+
+        <div
+          v-if="pokemonDetails[getPokemonId(pokemon.url)]"
+          class="pokemon-card"
+        >
+          <span class="type-title">Type</span>
+          <div class="pokemon-type">
             <span
               v-for="type in pokemonDetails[getPokemonId(pokemon.url)].types"
               :key="type.type.name"
@@ -32,32 +36,39 @@
             >
               {{ type.type.name }}
             </span>
-          </p>
+          </div>
 
           <div class="stats">
             <h3>Stats</h3>
             <div
               v-for="stat in pokemonDetails[getPokemonId(pokemon.url)].stats"
               :key="stat.stat.name"
+              :class="getStatClass(stat.stat.name)"
             >
               <span>{{ stat.stat.name }}: {{ stat.base_stat }}</span>
               <progress :value="stat.base_stat" max="160"></progress>
             </div>
           </div>
 
-          <audio
-            :id="`audio-${getPokemonId(pokemon.url)}`"
-            :src="`https://play.pokemonshowdown.com/audio/cries/${pokemon.name.toLowerCase()}.mp3`"
-          ></audio>
+          <div class="btns text-center column">
+            <audio
+              :id="`audio-${getPokemonId(pokemon.url)}`"
+              :src="`https://play.pokemonshowdown.com/audio/cries/${pokemon.name.toLowerCase()}.mp3`"
+            ></audio>
 
-          <button class="play-cry" @click="playCry(getPokemonId(pokemon.url))">
-            Play Cry
-          </button>
+            <button
+              class="play-cry"
+              @click="playCry(getPokemonId(pokemon.url))"
+            >
+              Play Cry
+            </button>
+
+            <button
+              @click="removePokemon(pokemon)"
+              class="remove-selected"
+            ></button>
+          </div>
         </div>
-      </div>
-
-      <div class="counter">
-        Total selected Pokémon: {{ selectedPokemons.length }}
       </div>
     </div>
   </div>
@@ -74,6 +85,25 @@ export default {
     const { getSelectedPokemons, removePokemon } = useTeam();
     const selectedPokemons = computed(() => getSelectedPokemons());
     const pokemonDetails = ref<Record<string, any>>({});
+
+    const getStatClass = (statName: string) => {
+      switch (statName) {
+        case "hp":
+          return "hp";
+        case "attack":
+          return "attack";
+        case "defense":
+          return "defense";
+        case "special-attack":
+          return "special-attack";
+        case "special-defense":
+          return "special-defense";
+        case "speed":
+          return "speed";
+        default:
+          return "";
+      }
+    };
 
     const getPokemonId = (url: string) => {
       const parts = url.split("/");
@@ -115,6 +145,7 @@ export default {
 
     return {
       selectedPokemons,
+      getStatClass,
       removePokemon,
       getPokemonId,
       pokemonDetails,
@@ -126,9 +157,31 @@ export default {
 </script>
 
 <style>
+h2 {
+  color: var(--text-color);
+}
+
+.pokemon-link {
+  color: var(--white);
+}
+
+.pokemon-card {
+  text-align: left;
+}
 
 .message {
   font-size: 2rem;
+  margin: 1rem 0;
+  color: var(--text-color);
+}
+
+.selected-pokemon .pokemon {
+  border-radius: 0.8rem;
+  padding: 1rem;
+}
+
+.pokemon-type,
+h3 {
   margin: 1rem 0;
 }
 </style>

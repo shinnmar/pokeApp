@@ -12,14 +12,14 @@
   align-items: center;
   margin: 4rem 1rem;
   background-color: #1e1c5c61;
-  border-radius: 8%;
+  border-radius: 3%;
   padding: 3rem 0rem;
   box-shadow: rgba(0, 0, 0, 0.24) 5px 5px 10px;
 }
 
 .pokemon-name {
   text-transform: capitalize;
-  font-size: 2rem;
+  font-size: 2.3rem;
   text-align: center;
 }
 
@@ -27,6 +27,15 @@
   display: flex;
   flex-wrap: wrap;
   text-align: center;
+}
+
+.selected-pokemon .pokemon,
+.pokemon-card {
+  font-size: 1.8rem;
+}
+
+.subtitle {
+  font-weight: 600;
 }
 
 @media (max-width: 992px) {
