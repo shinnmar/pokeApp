@@ -2,10 +2,11 @@
   <header>
     <div class="container">
       <nav>
-        <router-link class="nav_item" to="/"><img
-          class="logo"
-          src="../../assets/images/icon_pokeball.png"
-          alt="pokeball icon"
+        <router-link to="/"
+          >PokeApp<img
+            class="logo"
+            src="../../assets/images/icon_pokeball.png"
+            alt="pokeball icon"
         /></router-link>
         <ul class="nav_list">
           <router-link class="nav_item" to="/">Home</router-link>
@@ -30,6 +31,13 @@ nav {
   justify-content: space-between;
   align-items: center;
   height: 8rem;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+a {
+  display: flex;
+  align-items: center;
 }
 
 .nav_item {
@@ -38,10 +46,21 @@ nav {
 
 .logo {
   width: 35px;
+  margin: 0 0 0 1rem;
 }
 
 .nav_list {
   display: inline-flex;
   font-size: 1.8rem;
+}
+
+@media (max-width: 576px) {
+  .nav_item {
+    margin: 0 3rem 0 1rem;
+  }
+
+  .nav_item:last-child {
+    margin: 0;
+  }
 }
 </style>

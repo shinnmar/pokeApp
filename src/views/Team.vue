@@ -1,17 +1,17 @@
 <template>
   <div class="container">
-    <h1>Team</h1>
-    <div v-if="selectedPokemons.length === 0">
-      You've not selected a Pokémon.
-    </div>
-    <div v-else class="selected-pokemon">
+    <h2 class="text-center">PokeTeam</h2>
+    <article class="text-center" v-if="selectedPokemons.length === 0">
+      <span class="message">You've not selected a Pokémon.</span>
+    </article>
+    <div v-else class="selected-pokemon center">
       <div
         v-for="pokemon in selectedPokemons"
         :key="pokemon.name"
         class="pokemon"
       >
         <router-link :to="`/team/${getPokemonId(pokemon.url)}`">
-          <h2 class="pokemon-name">{{ pokemon.name }}</h2>
+          <h3 class="pokemon-name">{{ pokemon.name }}</h3>
           <img
             :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${getPokemonId(
               pokemon.url
@@ -19,7 +19,9 @@
             alt="pokemon.name"
           />
         </router-link>
-        <button @click="removePokemon(pokemon)" class="remove-selected">Remove Pokémon</button>
+        <button @click="removePokemon(pokemon)" class="remove-selected">
+          Remove Pokémon
+        </button>
         <div v-if="pokemonDetails[getPokemonId(pokemon.url)]">
           <p>
             Type:
@@ -33,7 +35,7 @@
           </p>
 
           <div class="stats">
-            <h2>Stats</h2>
+            <h3>Stats</h3>
             <div
               v-for="stat in pokemonDetails[getPokemonId(pokemon.url)].stats"
               :key="stat.stat.name"
@@ -48,7 +50,9 @@
             :src="`https://play.pokemonshowdown.com/audio/cries/${pokemon.name.toLowerCase()}.mp3`"
           ></audio>
 
-          <button class="play-cry" @click="playCry(getPokemonId(pokemon.url))">Play Cry</button>
+          <button class="play-cry" @click="playCry(getPokemonId(pokemon.url))">
+            Play Cry
+          </button>
         </div>
       </div>
 
@@ -56,9 +60,6 @@
         Total selected Pokémon: {{ selectedPokemons.length }}
       </div>
     </div>
-    <router-link to="/">
-      <button class="go-back">Go back to Pokédex</button>
-    </router-link>
   </div>
 </template>
 
@@ -66,7 +67,7 @@
 import { computed, ref, watch } from "vue";
 import { useTeam } from "../composables/useTeam";
 import { fetchPokemonDetail } from "../services/api";
-import { pokemonTypeClasses, PokemonType } from '../styles/pokemonTypes';
+import { pokemonTypeClasses, PokemonType } from "../styles/pokemonTypes";
 
 export default {
   setup() {
@@ -125,7 +126,9 @@ export default {
 </script>
 
 <style>
-img {
-  width: 10%;
+
+.message {
+  font-size: 2rem;
+  margin: 1rem 0;
 }
 </style>

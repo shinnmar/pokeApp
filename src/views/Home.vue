@@ -1,6 +1,9 @@
 <template>
   <div class="container">
-    <h1>Pokédex</h1>
+    <p class="text-center">
+      Add up to 6 Pokémon to your Team. Once you added total of Pokémon, please
+      go to Team page, click on each Pokémon to see more details! 😊
+    </p>
     <div v-if="loading">Loading...</div>
     <div v-if="error">{{ error }}</div>
 
@@ -10,7 +13,7 @@
         :key="pokemon.name"
         class="pokemon"
       >
-        <h2 class="pokemon-name">{{ pokemon.name }}</h2>
+        <h3 class="pokemon-name">{{ pokemon.name }}</h3>
         <img
           :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${getPokemonId(
             pokemon.url
@@ -33,10 +36,6 @@
           ></button>
         </div>
       </div>
-
-      <!--<router-link to="/team">
-        <button>Go to Team</button>
-      </router-link>!-->
     </div>
 
     <div class="counter">Pokémon Added: {{ selectionCount }}</div>
@@ -132,10 +131,17 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-  font-size: 4rem;
-  text-align: center;
-  margin: 3rem 0 0;
+
+p {
+  width: 70%;
+  color: var(--text-color);
+  font-size: 1.8rem;
+  margin: 0 auto;
+  font-weight: 600;
+}
+
+button {
+  margin: 0 3rem;
 }
 
 .pagination {
@@ -148,4 +154,5 @@ button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
 </style>

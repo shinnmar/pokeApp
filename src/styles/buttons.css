@@ -23,3 +23,10 @@ button {
   background-color: #8e9429;
   filter: invert(1);
 }
+
+.go-back {
+  font-size: 2rem;
+  text-decoration: underline;
+  font-weight: 700;
+  color: var(--white);
+}

@@ -8,6 +8,7 @@ import "./styles/container.css";
 import "./styles/pokemonTypes.css";
 import "./styles/buttons.css";
 import "./styles/pokemonStyles.css";
+import "./styles/typography.css";
 
 const app = createApp(App);
 

@@ -3,7 +3,6 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  max-width: 1400px;
 }
 
 .pokemon {
@@ -15,6 +14,7 @@
   background-color: #1e1c5c61;
   border-radius: 8%;
   padding: 3rem 0rem;
+  box-shadow: rgba(0, 0, 0, 0.24) 5px 5px 10px;
 }
 
 .pokemon-name {
@@ -25,6 +25,24 @@
 
 .selected-pokemon {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   text-align: center;
+}
+
+@media (max-width: 992px) {
+  .pokemon {
+    width: 40%;
+  }
+}
+
+@media (max-width: 768px) {
+  .pokemon {
+    width: 45%;
+  }
+}
+
+@media (max-width: 576px) {
+  .pokemon {
+    width: 60%;
+  }
 }

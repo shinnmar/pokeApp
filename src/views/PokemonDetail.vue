@@ -26,15 +26,17 @@
       </div>
 
       <div class="stats">
-        <h2>Stats</h2>
+        <h3>Stats</h3>
         <div v-for="stat in pokemon.stats" :key="stat.stat.name">
           <span>{{ stat.stat.name }}: {{ stat.base_stat }}</span>
           <progress :value="stat.base_stat" max="160"></progress>
         </div>
       </div>
 
+      <button @click="playCry">Play Cry</button>
+
       <div v-if="evolutionChain" class="evolution-chain column">
-        <h2 class="evolution-title">Evolution Chain</h2>
+        <h3 class="evolution-title">Evolution Chain</h3>
         <ul>
           <div class="evolution-pokemon">
             <li
@@ -52,8 +54,6 @@
           </div>
         </ul>
       </div>
-
-      <button @click="playCry">Play Cries</button>
     </div>
     <div v-else>Loading...</div>
   </div>
