@@ -15,7 +15,8 @@ export type PokemonType =
   | "dragon"
   | "dark"
   | "steel"
-  | "fairy";
+  | "fairy"
+  | "normal";
 
 export const pokemonTypeClasses: Record<PokemonType, string> = {
   fire: "type-fire",
@@ -35,4 +36,5 @@ export const pokemonTypeClasses: Record<PokemonType, string> = {
   dark: "type-dark",
   steel: "type-steel",
   fairy: "type-fairy",
+  normal: "type-normal",
 };

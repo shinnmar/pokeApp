@@ -155,3 +155,11 @@ img {
   margin: 0 0.6rem 0 0;
   border-radius: 20px;
 }
+
+.type-normal {
+  background-color: #cecbcd;
+  color: #383637;
+  padding: 0.4rem 1.8rem;
+  margin: 0 0.6rem 0 0;
+  border-radius: 20px;
+}
