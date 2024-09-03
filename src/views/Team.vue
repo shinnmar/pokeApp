@@ -1,17 +1,17 @@
 <template>
-  <div>
+  <div class="container">
     <h1>Team</h1>
     <div v-if="selectedPokemons.length === 0">
       You've not selected a Pokémon.
     </div>
-    <div v-else>
+    <div v-else class="selected-pokemon">
       <div
         v-for="pokemon in selectedPokemons"
         :key="pokemon.name"
         class="pokemon"
       >
         <router-link :to="`/team/${getPokemonId(pokemon.url)}`">
-          <p>{{ pokemon.name }}</p>
+          <h2 class="pokemon-name">{{ pokemon.name }}</h2>
           <img
             :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${getPokemonId(
               pokemon.url
@@ -19,8 +19,7 @@
             alt="pokemon.name"
           />
         </router-link>
-        <button @click="removePokemon(pokemon)">Quitar</button>
-
+        <button @click="removePokemon(pokemon)" class="remove-selected">Remove Pokémon</button>
         <div v-if="pokemonDetails[getPokemonId(pokemon.url)]">
           <p>
             Type:
@@ -49,7 +48,7 @@
             :src="`https://play.pokemonshowdown.com/audio/cries/${pokemon.name.toLowerCase()}.mp3`"
           ></audio>
 
-          <button @click="playCry(getPokemonId(pokemon.url))">Play Cry</button>
+          <button class="play-cry" @click="playCry(getPokemonId(pokemon.url))">Play Cry</button>
         </div>
       </div>
 
@@ -58,7 +57,7 @@
       </div>
     </div>
     <router-link to="/">
-      <button>Go back to Pokédex</button>
+      <button class="go-back">Go back to Pokédex</button>
     </router-link>
   </div>
 </template>

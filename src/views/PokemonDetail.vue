@@ -1,48 +1,62 @@
 <template>
-  <div class="pokemon-detail" v-if="pokemon.name">
-    <h1>{{ pokemon.name }}</h1>
-    <img
-      class="pokemon"
-      :src="pokemon.sprites.other['official-artwork'].front_default"
-      alt="pokemon.name"
-    />
+  <div class="container">
+    <div class="pokemon-detail column" v-if="pokemon.name">
+      <div class="pokemon">
+        <h1>{{ pokemon.name }}</h1>
+        <img
+          :src="pokemon.sprites.other['official-artwork'].front_default"
+          alt="pokemon.name"
+        />
 
-    <p>
-      Type:
-      <span
-        v-for="type in pokemon.types"
-        :key="type.type.name"
-        :class="getTypeClass(type.type.name)"
-        >{{ type.type.name }}</span
-      >
-    </p>
-    <p>Height: {{ pokemon.height / 10 }} m</p>
-    <p>Weight: {{ pokemon.weight / 10 }} kg</p>
+        <p>Type:</p>
+        <div class="pokemon-type">
+          <span
+            v-for="type in pokemon.types"
+            :key="type.type.name"
+            :class="getTypeClass(type.type.name)"
+            >{{ type.type.name }}</span
+          >
+        </div>
 
-    <p>Description:</p>
-    <p class="description">{{ description }}</p>
+        <p>Height: {{ pokemon.height / 10 }} m</p>
+        <p>Weight: {{ pokemon.weight / 10 }} kg</p>
 
-    <div class="stats">
-      <h2>Stats</h2>
-      <div v-for="stat in pokemon.stats" :key="stat.stat.name">
-        <span>{{ stat.stat.name }}: {{ stat.base_stat }}</span>
-        <progress :value="stat.base_stat" max="160"></progress>
+        <p>Description:</p>
+        <p class="description">{{ description }}</p>
       </div>
-    </div>
 
-    <div v-if="evolutionChain">
-      <h2>Evolution Chain:</h2>
-      <ul>
-        <li v-for="evolution in evolutionChain" :key="evolution.id">
-          {{ evolution.name }}
-          <img :src="getSpriteUrl(evolution.id)" :alt="evolution.name" />
-        </li>
-      </ul>
-    </div>
+      <div class="stats">
+        <h2>Stats</h2>
+        <div v-for="stat in pokemon.stats" :key="stat.stat.name">
+          <span>{{ stat.stat.name }}: {{ stat.base_stat }}</span>
+          <progress :value="stat.base_stat" max="160"></progress>
+        </div>
+      </div>
 
-    <button @click="playCry">Play Cries</button>
+      <div v-if="evolutionChain" class="evolution-chain column">
+        <h2 class="evolution-title">Evolution Chain</h2>
+        <ul>
+          <div class="evolution-pokemon">
+            <li
+              class="pokemon-item"
+              v-for="evolution in evolutionChain"
+              :key="evolution.id"
+            >
+              {{ evolution.name }}
+              <img
+                class="evolution-img"
+                :src="getSpriteUrl(evolution.id)"
+                :alt="evolution.name"
+              />
+            </li>
+          </div>
+        </ul>
+      </div>
+
+      <button @click="playCry">Play Cries</button>
+    </div>
+    <div v-else>Loading...</div>
   </div>
-  <div v-else>Loading...</div>
 </template>
 
 <script lang="ts">
@@ -142,20 +156,50 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.pokemon-detail {
-  text-transform: capitalize;
+.description {
+  text-transform: lowercase;
 }
 
 .pokemon {
-  width: 30%;
+  width: 50%;
 }
 
-.description {
-  text-transform: lowercase;
+.pokemon-type {
+  display: flex;
+  flex-direction: row;
+}
+
+.pokemon-detail {
+  text-transform: capitalize;
 }
 
 .stats {
   display: flex;
   flex-direction: column;
+  text-align: left;
+}
+
+.evolution-pokemon {
+  display: flex;
+  flex-direction: row;
+}
+
+.evolution-title {
+  text-align: center;
+}
+
+.evolution-img {
+  width: 50%;
+}
+
+.evolution-pokemon {
+  display: flex;
+  flex-direction: row;
+}
+
+.pokemon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>

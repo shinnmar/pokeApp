@@ -2,8 +2,12 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import { createPinia } from "pinia";
-import './styles/global.css';
-import './styles/variables.css';
+import "./styles/global.css";
+import "./styles/variables.css";
+import "./styles/container.css";
+import "./styles/pokemonTypes.css";
+import "./styles/buttons.css";
+import "./styles/pokemonStyles.css";
 
 const app = createApp(App);
 

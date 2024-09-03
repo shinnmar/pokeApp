@@ -1,15 +1,16 @@
 <template>
-  <div>
+  <div class="container">
     <h1>Pokédex</h1>
     <div v-if="loading">Loading...</div>
     <div v-if="error">{{ error }}</div>
-    <div v-else>
+
+    <div v-else class="pokemon-grid">
       <div
         v-for="pokemon in paginatedPokemonList"
         :key="pokemon.name"
         class="pokemon"
       >
-        <p>{{ pokemon.name }}</p>
+        <h2 class="pokemon-name">{{ pokemon.name }}</h2>
         <img
           :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${getPokemonId(
             pokemon.url
@@ -17,36 +18,37 @@
           alt="pokemon.name"
         />
 
-        <button
-          @click="addPokemon(pokemon)"
-          :disabled="
-            isPokemonSelected(pokemon) || selectionCount >= maxSelection
-          "
-        >
-          Add
-        </button>
-        <button
-          @click="removePokemon(pokemon)"
-          :disabled="!isPokemonSelected(pokemon)"
-        >
-          Remove
-        </button>
-      </div>
-      <div class="counter">Pokémon Added: {{ selectionCount }}</div>
-
-      <div class="pagination">
-        <button @click="previousPage" :disabled="currentPage === 1">
-          Previous
-        </button>
-        <span>Page {{ currentPage }} of {{ totalPages }}</span>
-        <button @click="nextPage" :disabled="currentPage >= totalPages">
-          Next
-        </button>
+        <div class="buttons">
+          <button
+            @click="addPokemon(pokemon)"
+            :disabled="
+              isPokemonSelected(pokemon) || selectionCount >= maxSelection
+            "
+            class="add"
+          ></button>
+          <button
+            @click="removePokemon(pokemon)"
+            :disabled="!isPokemonSelected(pokemon)"
+            class="remove"
+          ></button>
+        </div>
       </div>
 
-      <router-link to="/team">
+      <!--<router-link to="/team">
         <button>Go to Team</button>
-      </router-link>
+      </router-link>!-->
+    </div>
+
+    <div class="counter">Pokémon Added: {{ selectionCount }}</div>
+
+    <div class="pagination">
+      <button @click="previousPage" :disabled="currentPage === 1">
+        Previous
+      </button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button @click="nextPage" :disabled="currentPage >= totalPages">
+        Next
+      </button>
     </div>
   </div>
 </template>
@@ -130,15 +132,10 @@ export default {
 </script>
 
 <style scoped>
-img {
-  width: 8%;
-}
-
-.pokemon {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 10px;
+h1 {
+  font-size: 4rem;
+  text-align: center;
+  margin: 3rem 0 0;
 }
 
 .pagination {
@@ -147,18 +144,8 @@ img {
   margin-top: 20px;
 }
 
-button {
-  cursor: pointer;
-  margin: 0 5px;
-}
-
 button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
-}
-
-.counter {
-  margin-top: 20px;
-  font-weight: 600;
 }
 </style>

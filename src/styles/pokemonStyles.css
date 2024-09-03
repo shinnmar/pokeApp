@@ -1,0 +1,30 @@
+.pokemon-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 1400px;
+}
+
+.pokemon {
+  width: 28%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 4rem 1rem;
+  background-color: #1e1c5c61;
+  border-radius: 8%;
+  padding: 3rem 0rem;
+}
+
+.pokemon-name {
+  text-transform: capitalize;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.selected-pokemon {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
