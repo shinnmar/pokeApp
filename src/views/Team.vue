@@ -161,12 +161,21 @@ h2 {
   color: var(--text-color);
 }
 
+.pokemon {
+  position: relative;
+  padding: 2.5rem;
+}
+
 .pokemon-link {
   color: var(--white);
 }
 
 .pokemon-card {
   text-align: left;
+}
+
+.type-title {
+  font-weight: 600;
 }
 
 .message {
@@ -183,5 +192,9 @@ h2 {
 .pokemon-type,
 h3 {
   margin: 1rem 0;
+}
+
+.audio {
+  margin: 2rem 0 0;
 }
 </style>

@@ -9,6 +9,6 @@ h2 {
   margin: 0 auto;
 }
 
-h3 {
+h3, .md-text {
   font-size: 2rem;
 }

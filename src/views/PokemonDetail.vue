@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="pokemon-detail column" v-if="pokemon.name">
-      <div class="content row">
+      <div class="content row row-md">
         <div class="pokemon">
           <h1>{{ pokemon.name }}</h1>
           <img
@@ -22,18 +22,26 @@
 
             <div class="info">
               <p>
-                <span class="subtitle">Height:</span> {{ pokemon.height / 10 }} m
+                <span class="subtitle">Height:</span>
+                {{ pokemon.height / 10 }} m
               </p>
-              <p><span class="subtitle">Weight:</span> {{ pokemon.weight / 10 }} kg</p>
+              <p>
+                <span class="subtitle">Weight:</span>
+                {{ pokemon.weight / 10 }} kg
+              </p>
             </div>
 
             <p class="subtitle">Description:</p>
             <p class="description">{{ description }}</p>
+
+            <div class="audio">
+              <button class="play-cry" @click="playCry">Play Cry</button>
+            </div>
           </div>
         </div>
 
         <div class="stats">
-          <h3>Stats</h3>
+          <h3 class="subtitle">Stats</h3>
           <div
             v-for="stat in pokemon.stats"
             :key="stat.stat.name"
@@ -45,14 +53,12 @@
         </div>
       </div>
 
-      <button @click="playCry">Play Cry</button>
-
       <div v-if="evolutionChain" class="evolution-chain column">
-        <h3 class="evolution-title">Evolution Chain</h3>
+        <h3 class="evolution-title subtitle">Evolution Chain</h3>
         <ul>
-          <div class="evolution-pokemon">
+          <div class="evolution-pokemon center">
             <li
-              class="pokemon-item"
+              class="pokemon-item md-text"
               v-for="evolution in evolutionChain"
               :key="evolution.id"
             >
@@ -220,6 +226,15 @@ export default defineComponent({
   width: 100%;
 }
 
+.audio {
+  text-align: center;
+}
+
+.play-cry {
+  width: 60%;
+  margin: 0 auto;
+}
+
 .stats {
   display: flex;
   flex-direction: column;
@@ -232,22 +247,46 @@ export default defineComponent({
   flex-direction: row;
 }
 
-.evolution-title {
-  text-align: center;
-}
-
 .evolution-img {
-  width: 50%;
+  width: 60%;
 }
 
 .evolution-pokemon {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .pokemon-item {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0 0 3rem 0;
+  width: 300px;
+}
+
+.evolution-chain {
+  margin: 0 0 4rem 0;
+}
+
+@media (max-width: 992px) {
+  .pokemon {
+    width: 60%;
+  }
+}
+
+@media (max-width: 768px) {
+  .pokemon,
+  .stats {
+    width: 80%;
+  }
+
+  .pokemon-item {
+    width: 250px;
+  }
+
+  .evolution-img {
+    width: 70%;
+  }
 }
 </style>

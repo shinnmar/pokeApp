@@ -4,9 +4,25 @@
       Add up to 6 Pokémon to your Team. Once you added total of Pokémon, please
       go to Team page, click on each Pokémon to see more details! 😊
     </p>
+
+    <div class="pagination">
+      <button
+        class="prev"
+        @click="previousPage"
+        :disabled="currentPage === 1"
+      ></button>
+      <span>Page {{ currentPage }} / {{ totalPages }}</span>
+      <button
+        class="next"
+        @click="nextPage"
+        :disabled="currentPage >= totalPages"
+      ></button>
+    </div>
+
     <div v-if="loading">Loading...</div>
     <div v-if="error">{{ error }}</div>
 
+    
     <div v-else class="pokemon-grid">
       <div
         v-for="pokemon in paginatedPokemonList"
@@ -41,11 +57,17 @@
     <div class="counter">Pokémon Added: {{ selectionCount }}</div>
 
     <div class="pagination">
-      <button class="prev" @click="previousPage" :disabled="currentPage === 1">
-      </button>
+      <button
+        class="prev"
+        @click="previousPage"
+        :disabled="currentPage === 1"
+      ></button>
       <span>Page {{ currentPage }} / {{ totalPages }}</span>
-      <button class="next" @click="nextPage" :disabled="currentPage >= totalPages">
-      </button>
+      <button
+        class="next"
+        @click="nextPage"
+        :disabled="currentPage >= totalPages"
+      ></button>
     </div>
   </div>
 </template>
@@ -134,7 +156,7 @@ p {
   width: 70%;
   color: var(--text-color);
   font-size: 1.8rem;
-  margin: 0 auto;
+  margin:0 auto 2rem;
   font-weight: 600;
 }
 
@@ -142,15 +164,8 @@ button {
   margin: 0 3rem;
 }
 
-.pagination {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
 button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
-
 </style>
