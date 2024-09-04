@@ -6,9 +6,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import BaseLayout from "@/components/Layout/BaseLayout.vue";
-import Header from "@/components/Header/Header.vue";
+import { defineComponent } from "vue";
+import Header from "@/components/header/Header.vue";
+import BaseLayout from "@/components/layout/BaseLayout.vue";
 
 export default defineComponent({
   components: {
