@@ -8,7 +8,7 @@ button {
 }
 
 .add {
-  background: url(src/assets/images/icon_plus.png) no-repeat;
+  background: url("../assets/images/icon_plus.png") no-repeat;
   background-size: cover;
   width: 3rem;
   height: 3rem;
@@ -17,7 +17,7 @@ button {
 }
 
 .remove {
-  background: url(src/assets/images/icon_minus.svg) no-repeat;
+  background: url("../assets/images/icon_minus.svg") no-repeat;
   background-size: contain;
   width: 3rem;
   height: 3rem;
@@ -49,7 +49,7 @@ button {
 
 .remove-selected::before {
   content: "";
-  background: url(src/assets/images/icon_close.png) no-repeat;
+  background: url("../assets/images/icon_close.png") no-repeat;
   width: 1.4rem;
   height: 1.3rem;
   background-position: center;
@@ -64,7 +64,7 @@ button {
 .next::after,
 .prev::before {
   content: "";
-  background: url(src/assets/images/icon_prev.svg) no-repeat;
+  background: url("../assets/images/icon_prev.svg") no-repeat;
   width: 2.8rem;
   height: 2.8rem;
   background-position: center;

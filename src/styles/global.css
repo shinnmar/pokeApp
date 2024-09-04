@@ -13,7 +13,7 @@ body {
   height: 100%;
   overflow-x: hidden;
   color: var(--white);
-  background: url(src/assets/images/bg_pokemon_woods.jpeg) no-repeat;
+  background: url("../assets/images/bg_pokemon_woods.jpeg") no-repeat;
   background-size: cover;
   background-position: center;
   background-clip: border-box;
