@@ -94,6 +94,10 @@ img {
   }
 }
 
+.pb-20 {
+  padding-bottom: 4rem;
+}
+
 .stats {
   margin: 2rem 0;
   text-align: left;
@@ -102,7 +106,7 @@ img {
 }
 
 .pagination {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   display: flex;
   align-items: center;
   font-weight: 600;
@@ -112,4 +116,8 @@ img {
   width: 180px;
   margin: 0 auto;
   color: var(--text-color);
+
+  span {
+    margin: 0 2rem;
+  }
 }

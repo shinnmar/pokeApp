@@ -56,7 +56,8 @@
 
     <div class="counter">Pokémon Added: {{ selectionCount }}</div>
 
-    <div class="pagination">
+    <article class="pb-20">
+      <div class="pagination">
       <button
         class="prev"
         @click="previousPage"
@@ -69,6 +70,7 @@
         :disabled="currentPage >= totalPages"
       ></button>
     </div>
+    </article>
   </div>
 </template>
 
