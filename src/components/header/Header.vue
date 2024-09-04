@@ -47,6 +47,7 @@ a {
 .logo {
   width: 35px;
   margin: 0 0 0 1rem;
+  filter: none;
 }
 
 .nav_list {
